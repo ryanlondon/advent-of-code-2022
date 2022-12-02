@@ -21,23 +21,25 @@ func main() {
 }
 
 func part1(data string) {
-	heaviestElfLoad := math.MinInt
 	elfCollections := strings.Split(string(data), "\n\n")
 
-	for _, elfCollection := range elfCollections {
-		var elfLoad int
+	elfLoadRecucer := func(acc int, elfCollection string) int {
 		items := strings.Split(elfCollection, "\n")
+		var elfLoad int
 
 		for _, item := range items {
 			parsedItem, _ := strconv.Atoi(item)
 			elfLoad += parsedItem
 		}
 
-		if elfLoad > heaviestElfLoad {
-			heaviestElfLoad = elfLoad
+		if elfLoad > acc {
+			return elfLoad
+		} else {
+			return acc
 		}
 	}
 
+	heaviestElfLoad := utils.Reduce(elfCollections, elfLoadRecucer, math.MinInt)
 	fmt.Println(heaviestElfLoad)
 }
 
