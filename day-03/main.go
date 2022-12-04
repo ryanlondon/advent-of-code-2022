@@ -42,7 +42,7 @@ func getRepeatedRuneInRucksack(rucksack string) rune {
 
 func findCommonRuneInRucksacks(rucksacks []string) rune {
 	set := make(map[rune]bool)
-	subset1 := make(map[rune]bool)
+	subset := make(map[rune]bool)
 
 	for _, rune := range rucksacks[0] {
 		set[rune] = true
@@ -50,12 +50,12 @@ func findCommonRuneInRucksacks(rucksacks []string) rune {
 
 	for _, rune := range rucksacks[1] {
 		if set[rune] {
-			subset1[rune] = true
+			subset[rune] = true
 		}
 	}
 
 	for _, rune := range rucksacks[2] {
-		if subset1[rune] {
+		if subset[rune] {
 			return rune
 		}
 	}
